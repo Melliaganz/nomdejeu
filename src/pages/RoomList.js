@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ref, push, onValue, set } from 'firebase/database';
+import { Link } from 'react-router-dom';
+
 
 const RoomList = ({ database, userId }) => {
   const [rooms, setRooms] = useState([]);
@@ -36,15 +38,23 @@ const RoomList = ({ database, userId }) => {
     try {
       const roomsRef = ref(database, 'rooms');
       const newRoomRef = push(roomsRef);
-      await set(newRoomRef, { name: roomName, users: [] });
   
-      // Mettre à jour l'état local pour inclure le nouveau salon
-      setRooms((prevRooms) => [...prevRooms, { id: newRoomRef.key, name: roomName, users: [] }]);
+      // Utilisez une fonction de rappel pour obtenir la clé générée par Firebase
+      await set(newRoomRef, { name: roomName, users: [] }, (error) => {
+        if (error) {
+          console.error('Erreur en créant le salon :', error.message);
+          alert('Erreur en créant le salon. Veuillez réessayer.');
+        } else {
+          // Mettre à jour l'état local avec la nouvelle salle
+          setRooms((prevRooms) => [...prevRooms, { id: newRoomRef.key, name: roomName, users: [] }]);
+        }
+      });
     } catch (error) {
       console.error('Erreur en créant le salon :', error.message);
       alert('Erreur en créant le salon. Veuillez réessayer.');
     }
   };
+  
 
   const joinRoom = (roomId) => {
     try {
@@ -70,24 +80,22 @@ const RoomList = ({ database, userId }) => {
   };
 
   return (
-    <div style={{display:'flex', justifyContent:'center', flexDirection:'column', alignItems:'center' }}>
+    <div style={{display:'flex', justifyContent:'center', flexDirection:'column', alignItems:'center',backgroundColor:'blue', borderRadius:25, padding: 25 }}>
       {loading && <p>Loading...</p>}
 
       {!loading && rooms.length === 0 && <p>No rooms available.</p>}
 
       {rooms.map((room) => (
-        <div key={room.id} style={{display:'flex', justifyContent:'center', flexDirection:'column', alignItems:'center' }}>
-          {room.name}{' '}
-          <button onClick={() => joinRoom(room.id)}>Join Room</button>
-          <div>Users: {room.users ? room.users.join(', ') : 'No users'}</div>
-        </div>
-      ))}
+  <div key={room.id}>
+    <Link to={`/room/${room.id}`}>{room.name}</Link>{' '}
+  </div>
+))}
 
-      <button style={{ backgroundColor: 'blue', borderRadius: 25, padding: 10 , display:'flex', justifyContent:'center', flexDirection:'column', alignItems:'center' }}  onClick={() => createRoom('New Room')}>
+      <button style={{ backgroundColor: 'black', borderRadius: 25, padding: 10 , display:'flex', justifyContent:'center', flexDirection:'column', alignItems:'center' }}  onClick={() => createRoom('New Room')}>
         Créer salon
       </button>
 
-      <div style={{ marginTop: '20px', backgroundColor: 'blue', padding: 15, borderRadius: 25, display:'flex', justifyContent:'center', flexDirection:'column', alignItems:'center' }}>
+      <div style={{ marginTop: '20px', padding: 15, borderRadius: 25, display:'flex', justifyContent:'center', flexDirection:'column', alignItems:'center' }}>
         <h2>Joined Rooms</h2>
         {joinedRooms.length === 0 && <p>No joined rooms.</p>}
         {joinedRooms.map((roomId) => (

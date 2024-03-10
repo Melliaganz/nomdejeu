@@ -6,6 +6,7 @@ import { getDatabase, ref, push, onValue } from 'firebase/database';
 import "./App.css"
 import Home from "./pages/Home";
 import Header from "./components/Header";
+import RoomDetails from "./pages/RoomDetails"
 
 
 const firebaseConfig = {
@@ -29,6 +30,7 @@ function App() {
     <Header />
     <Routes>
     <Route element={<Home database={database}/>} path="/" />
+    <Route element={<RoomDetails database={database} />} path="/room/:roomId" />
     </Routes>
     </BrowserRouter>
   );
