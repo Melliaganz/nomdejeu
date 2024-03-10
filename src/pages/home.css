@@ -1,0 +1,17 @@
+
+.accueilContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    color: white;
+    padding-top: 150px;
+}
+.accueil{
+    display: flex;
+    justify-content: center;
+    padding: 50px;
+    background-color: rgba(19, 2, 2, 0.416);
+    border-radius: 50px;
+    width: 80vw;
+}
