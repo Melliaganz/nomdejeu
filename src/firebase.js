@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getDatabase } from "firebase/database"
+import { getDatabase, ref, set } from "firebase/database";
 
 
 const firebaseConfig = {
@@ -13,6 +13,8 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const database = getDatabase(app); // Use getDatabase to initialize the Realtime Database
+const db = getDatabase(app); // Use getDatabase to initialize the Realtime Database
+const dbref = ref(db, 'server/saving-data/fireblog');
 
-export { app,  database };
+
+export { app };
