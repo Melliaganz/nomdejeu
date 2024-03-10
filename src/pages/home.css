@@ -1,6 +1,7 @@
 
 .accueilContainer{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     align-content: center;
@@ -9,9 +10,20 @@
 }
 .accueil{
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    padding: 50px;
-    background-color: rgba(19, 2, 2, 0.416);
+    align-items: center;
+    padding: 50px;    
+    background-size: 100%;
+    background-image: linear-gradient(
+        to bottom,
+        rgba(255, 255, 0, 0),
+        rgba(0, 0, 255, 0)
+      ), url('../images/0001-0059.gif');
     border-radius: 50px;
     width: 80vw;
+    background-repeat: no-repeat;
+}
+.salonsAccueil{
+    display: flex;
 }

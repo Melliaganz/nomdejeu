@@ -13,7 +13,7 @@ function Header() {
 // }}
 return(
     <header className='header'>
-        <img src={logo} alt='logo' height={100}></img>
+        <img src={logo} alt='logo' height={50} width={100}></img>
         <button className='bouttonHeader'><span className="material-symbols-outlined">
 menu
 </span></button>

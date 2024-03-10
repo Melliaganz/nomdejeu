@@ -1,17 +1,18 @@
-import React from 'react'
-import "./home.css"
-import logo from "../images/logo_les_mellian_jeux.png"
-import RoomList from './RoomList'
+import React from 'react';
+import "./home.css";
+import logo from "../images/0001-0059.gif";
+import RoomList from './RoomList';
 
-function Home() {
+// Destructure the 'database' prop
+function Home({ database }) {
   return (
     <section className='accueilContainer'>
       <div className='accueil'>
-        <img src={logo} alt="logo" height={150} />
-        {/* <div><RoomList /></div> */}
+        <div className='salonsAccueil'><RoomList database={database} /></div>
       </div>
+
     </section>
-  )
+  );
 }
 
-export default Home
+export default Home;
