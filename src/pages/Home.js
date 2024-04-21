@@ -1,6 +1,5 @@
 import React from 'react';
 import "./home.css";
-import logo from "../images/0001-0059.gif";
 import RoomList from './RoomList';
 
 // Destructure the 'database' prop

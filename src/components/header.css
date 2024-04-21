@@ -1,5 +1,14 @@
 header{
-    position:fixed;
+    position:sticky;
+    top: 0px;
+    width: 98vw;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: black;
+}
+nav{
+    position:sticky;
     top: 0px;
     width: 98vw;
     display: flex;
@@ -18,15 +27,17 @@ button{
     align-items: center;
     gap: 10px;
 }
-.menuContainer{
-    padding: 10px;
-}
-.menuContainer:hover{
-    cursor: pointer;
-    border-radius: 25px;
-    opacity: 0.2;
-    background-color: #747373;
-}
 .username{
+    display: flex;
+    align-items: center;
     font-family: 'Roboto', sans-serif;
+    gap: 10;
+}
+.dropdownMenu{
+    display: flex;
+    justify-content: flex-end;
+    background-color: black;
+    text-decoration: none;
+    color: white;
+
 }

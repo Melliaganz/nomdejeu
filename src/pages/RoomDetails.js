@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom'
 function RoomDetails({database}) {
     const {roomId} = useParams();
   return (
-    <div className='roomDetailsContainer'>mon cul</div>
+    <section className=''></section>
   )
 }
 

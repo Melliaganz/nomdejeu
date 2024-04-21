@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ref, push, onValue, set, get } from 'firebase/database';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const RoomList = ({ database, userId }) => {
   const [rooms, setRooms] = useState([]);
@@ -11,32 +11,7 @@ const RoomList = ({ database, userId }) => {
   const handleRoomNameChange = (e) => {
     setNewRoomName(e.target.value);
   };
-  const navigate = useNavigate();
-  const fetchData = () => {
-    const roomsRef = ref(database, 'rooms');
-    onValue(roomsRef, async (snapshot) => {
-      const roomsData = snapshot.val();
-      const roomsArray = roomsData
-        ? await Promise.all(Object.entries(roomsData).map(async ([roomId, roomData]) => {
-            const users = roomData.users || [];
-            const participantsCount = users.length;
   
-            // Vous pouvez également faire d'autres opérations asynchrones ici si nécessaire
-  
-            return {
-              id: roomId,
-              ...roomData,
-              participantsCount,
-            };
-          }))
-        : [];
-      setRooms(roomsArray);
-      setLoading(false);
-    }, (error) => {
-      console.error('Error fetching rooms:', error.message);
-      setLoading(false);
-    });
-  };
   useEffect(() => {
     const fetchData = () => {
       const roomsRef = ref(database, 'rooms');
